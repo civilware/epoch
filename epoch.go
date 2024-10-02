@@ -65,6 +65,8 @@ func init() {
 	epoch.port = fmt.Sprintf(":%d", DEFAULT_WORK_PORT)
 	SetMaxThreads(DEFAULT_MAX_THREADS)
 	epoch.maxHashes = 1000
+
+	epoch.session.Version = "1.0.0" // EPOCH package version
 }
 
 // Check if EPOCH connection is active
@@ -101,7 +103,7 @@ func (e *EPOCH) getJob() (job rpc.GetBlockTemplate_Result) {
 
 // JobIsReady waits for a JobID to be present, it returns error if job is not found before timeout duration
 func JobIsReady(timeout time.Duration) (err error) {
-	timer := time.NewTicker(timeout)
+	timer := time.NewTimer(timeout)
 	defer timer.Stop()
 
 	for {
@@ -232,7 +234,7 @@ func StopGetWork() {
 	}
 }
 
-// Start listening to GetWork server, if address is empty string epoch.address will be used
+// Start listening to GetWork server, if address is empty string epoch.address will be used,
 // endpoint is a DERO daemon address and will use the port defined by SetPort() to connect to GetWork,
 // when StartGetWork is successfully connected it will set the EPOCH session totals to zero
 func StartGetWork(address, endpoint string) (err error) {
@@ -298,7 +300,7 @@ func StartGetWork(address, endpoint string) (err error) {
 			}
 
 			if lastError := epoch.newJob(result); lastError != "" {
-				logger.Errorf("[EPOCH] Job error: %s\n", epoch.jobs.job.LastError)
+				logger.Errorf("[EPOCH] Job error: %s\n", lastError)
 			}
 		}
 
@@ -380,7 +382,7 @@ func submitBlock(job rpc.GetBlockTemplate_Result, powhash [32]byte, work [block.
 	return
 }
 
-// AttemptHashes preforms the POW for the number of hashes and submits valid hashes as miniblocks to the connected node,
+// AttemptHashes performs the POW for the number of hashes and submits valid hashes as miniblocks to the connected node,
 // when it is called it increases the session total for hashes and blocks as per the result
 func AttemptHashes(hashes int) (result EPOCH_Result, err error) {
 	if !IsActive() {

@@ -54,7 +54,7 @@ type (
 	}
 )
 
-// AttemptEPOCH preforms the POW and submits its results to the connected node
+// AttemptEPOCH performs the POW and submits its results to the connected node
 func AttemptEPOCH(ctx context.Context, p Attempt_Params) (result EPOCH_Result, err error) {
 	return AttemptHashes(p.Hashes)
 }
@@ -102,6 +102,7 @@ func GetAddressEPOCH(ctx context.Context) (result GetAddressEPOCH_Result, err er
 type GetSessionEPOCH_Result struct {
 	Hashes     uint64 `json:"sessionHashes"`
 	MiniBlocks int    `json:"sessionMinis"`
+	Version    string `json:"sessionVersion"`
 }
 
 // GetSessionEPOCH returns the statistics for the current EPOCH session if active. There may be multiple applications connected to

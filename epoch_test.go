@@ -119,7 +119,7 @@ func TestEPOCH(t *testing.T) {
 		// powHash error
 		epoch.jobs.job.Blockhashing_blob = "invalid" // won't decode
 		_, _, _, _, err = powHash()
-		assert.Error(t, err, "powHash should error when offline")
+		assert.Error(t, err, "powHash should error with invalid Blockhashing_blob")
 		// HashesToString
 		thousandFormat := uint64(10100)
 		millionFormat := uint64(10100000)
@@ -261,6 +261,7 @@ func TestEPOCH(t *testing.T) {
 		sess, err := GetSessionEPOCH(context.Background())
 		assert.NoError(t, err, "GetSessionEPOCH should not error: %s", err)
 		assert.NotZero(t, sess.Hashes, "Hashes should be above zero")
+		assert.Equal(t, epoch.session.Version, sess.Version, "Versions should be equal")
 
 		// GetMaxHashes
 		_, err = GetMaxHashesEPOCH(context.Background())
@@ -292,7 +293,7 @@ func TestEPOCH(t *testing.T) {
 
 		// Start server with invalid endpoint string
 		StopGetWork()
-		err = StartGetWork("", "")
+		err = StartGetWork("", "") // should err on invalid host
 		assert.Error(t, err, "StartGetWork should error with invalid endpoint")
 
 		// Start server with invalid address
@@ -306,8 +307,8 @@ func TestEPOCH(t *testing.T) {
 
 		// Invalid daemon address
 		epoch.address = w.GetAddress().String()
-		err = StartGetWork("", "invalid:20101") // should err on invalid host
-		assert.Error(t, err, "StartGetWork should error with invalid epoch.address")
+		err = StartGetWork("", "invalid:20101") // should err on dial
+		assert.Error(t, err, "StartGetWork should error with invalid daemon address")
 	})
 }
 

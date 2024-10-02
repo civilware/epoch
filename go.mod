@@ -5,20 +5,21 @@ go 1.21
 toolchain go1.21.5
 
 require (
-	github.com/civilware/tela v0.0.0-20240825081920-cff8526dc8c9
+	github.com/civilware/tela v0.0.0-20240912213039-e4e13230c390
 	github.com/creachadair/jrpc2 v0.35.4
 	github.com/deroproject/derohe v0.0.0-20240405032004-bd300c0e086e
 	github.com/gorilla/websocket v1.5.0
 	github.com/stretchr/testify v1.8.4
 )
 
-replace github.com/deroproject/derohe => github.com/civilware/derohe v0.0.0-20240623183508-41c781704d12
+replace github.com/deroproject/derohe => github.com/civilware/derohe v0.0.0-20240909003240-fa76d6016cc6
 
 require (
 	github.com/VictoriaMetrics/metrics v1.23.1 // indirect
 	github.com/blang/semver/v4 v4.0.0 // indirect
 	github.com/caarlos0/env/v6 v6.10.1 // indirect
 	github.com/cespare/xxhash v1.1.0 // indirect
+	github.com/coder/websocket v1.8.12 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dchest/siphash v1.2.3 // indirect
 	github.com/deroproject/graviton v0.0.0-20220130070622-2c248a53b2e1 // indirect
@@ -26,10 +27,8 @@ require (
 	github.com/fxamacker/cbor/v2 v2.4.0 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/go-logr/zapr v1.2.3 // indirect
-	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-cmp v0.5.8 // indirect
 	github.com/hashicorp/golang-lru v0.5.1 // indirect
-	github.com/klauspost/compress v1.15.13 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.6 // indirect
 	github.com/klauspost/reedsolomon v1.11.5 // indirect
 	github.com/minio/sha256-simd v1.0.0 // indirect
@@ -55,5 +54,4 @@ require (
 	golang.org/x/time v0.0.0-20191024005414-555d28b269f0 // indirect
 	golang.org/x/xerrors v0.0.0-20231012003039-104605ab7028 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	nhooyr.io/websocket v1.8.7 // indirect
 )

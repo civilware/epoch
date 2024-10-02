@@ -37,7 +37,7 @@ This relationship fosters a virtuous cycle:
 By aligning the interests of developers and users, EPOCH's Crowd Mining protocol ensures that the focus remains on creating superior applications that benefit all parties involved.
 
 ### Package Information
-The `civilware/epoch` [go package](https://pkg.go.dev/github.com/Civilware/epoch) provides a interface for applications connecting to a [DERO](https://dero.io) node's GetWork server. It is designed to handle incoming EPOCH requests, enabling users to attempt or submit mining hashes to earn network rewards. This package can be utilized directly in applications or through WebSocket (WS) connections using the provided API, making it versatile for various application use cases.
+The `civilware/epoch` [go package](https://pkg.go.dev/github.com/Civilware/epoch) provides an interface for applications connecting to a [DERO](https://dero.io) node's GetWork server. It is designed to handle incoming EPOCH requests, enabling users to attempt or submit mining hashes to earn network rewards. This package can be utilized directly in applications or through WebSocket (WS) connections using the provided API, making it versatile for various application use cases.
 
 ### Importing the Package
 Before using the package, ensure [go](https://go.dev/doc/install) is installed on your device. You can import the `civilware/epoch` package in your Go file with the following statement:
@@ -72,7 +72,7 @@ func main() {
 		// Handle error
 	}
 	// The above StartGetWork will connect to port :10100 at daemon 127.0.0.1:20000 by default,
-	// a custom GetWork port can be defined calling epoch.SetPort(port) prior to StartGetWork.
+	// a custom GetWork port can be defined by calling epoch.SetPort(port) prior to StartGetWork.
 	// Once connected, EPOCH will continually update jobs while waiting for calls to attempt or submit hashes.
 
 	// Wait for first job to be ready with a 10 second timeout
@@ -81,7 +81,7 @@ func main() {
 		// Handle error
 	}
 
-	// Attempts can be called directly from the package or added to the applications API
+	// Attempts can be called directly from the package or added to the application's API
 	result, err := epoch.AttemptHashes(1000)
 	if err != nil {
 		// Handle error
@@ -94,10 +94,10 @@ func main() {
 ```
 
 ### Examples Using Engram
-For applications such as [Engram](https://github.com/DEROFDN/engram) that can handle external connections, EPOCH methods can be seamlessly integrated to to the application and utilized by calling the package's provided API.
+For host applications such as [Engram](https://github.com/DEROFDN/engram) that can handle external connections, EPOCH methods can be seamlessly integrated into the application and utilized by calling the package's provided API.
 ```go
 import (
-	"github.com/civilware/engram/epoch"
+	"github.com/civilware/epoch"
 	"github.com/deroproject/derohe/walletapi/xswd"
 )
 
@@ -231,7 +231,8 @@ Gets the current stats for all EPOCH requests that have occurred during a sessio
 ```json
 {
     "sessionHashes": 1200,
-    "sessionMinis": 0
+    "sessionMinis": 0,
+    "sessionVersion": "1.0.0"
 }
 ```
 
